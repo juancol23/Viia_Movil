@@ -41,6 +41,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,7 +60,7 @@ public class Task extends AppCompatActivity {
     private Bitmap bitmap;
     private ImageView mSetImage;
     private Button mOptionButton;
-    private Button mSubir;
+    private Button mSubir,mSubirTelerik;
     private RelativeLayout mRlView;
     private String mPath;
     private ProgressDialog mProgress;
@@ -72,6 +73,7 @@ public class Task extends AppCompatActivity {
     //Servicio
     //private String UploadUrl = "http://legalmovil.com/service/updateinf2o.php";
     private String UploadUrl = "http://legalmovil.com/invian/welcome/nombre";
+    private String urlTelerikServiceI = "https://api.everlive.com/v1/e82dy3vmux1jchlu/VT_incidencia/";
 
 
     @Override
@@ -94,6 +96,10 @@ public class Task extends AppCompatActivity {
         mSubir = (Button) findViewById(R.id.subir);
         mRlView = (RelativeLayout) findViewById(R.id.activity_task);
 
+
+
+        mSubirTelerik =(Button)  findViewById(R.id.btnTelerik);
+
         if(mayRequestStoragePermission()) {
             mOptionButton.setEnabled(true);
         }else {
@@ -103,7 +109,7 @@ public class Task extends AppCompatActivity {
         mSubir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upImage();
+                //upImage();
                 mProgress.setMessage("Cargando...");
                 mProgress.show();
             }
@@ -115,7 +121,14 @@ public class Task extends AppCompatActivity {
 
             }
         });
-
+        mSubirTelerik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                upTelerik();
+                mProgress.setMessage("Enviando a telerik...");
+                mProgress.show();
+            }
+        });
     }
     private boolean mayRequestStoragePermission() {
 
@@ -236,7 +249,7 @@ public class Task extends AppCompatActivity {
         }
     }
 
-    private void upImage() {
+    private void upImage(final String getFecha) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST,UploadUrl ,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -259,30 +272,25 @@ public class Task extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String,String>();
-                //String ten = nombre.getText().toString;
+
                 String imagen_camara = imageToString(bitmap);
-
                 String userEmail = getIntent().getExtras().getString("rUser");
-
                 String obser= mEditText_observacion.getText().toString().trim();
                 String punt= mEditText_punto.getText().toString().trim();
-               /* DateFormat df = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
-                String fech = df.format(Calendar.getInstance().getTime());
-                mEditText_fecha.setText(fech);
-*/
+
 
                 String name ="Viia Task";
                 String usuario =userEmail;
                 String punto =punt;
                 String observacion =obser;
-                String fecha ="Fecha hoy";
+                String fecha ="";
 
 
                 params.put("name",name);
                 params.put("usuario",usuario);
                 params.put("punto",punto);
                 params.put("observacion",observacion);
-                params.put("fecha",fecha);
+                params.put("fecha",getFecha);
 
                  params.put("image",imagen_camara);
                // Log.v("imagen_camara",h);
@@ -294,6 +302,56 @@ public class Task extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
+    /*Enviar a telerik*/
+    private void upTelerik() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,urlTelerikServiceI ,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(),"Enviado Correctamente a Telerik",Toast.LENGTH_LONG).show();
+                mProgress.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Task.this,"Hubo un error en el envio a telerik",Toast.LENGTH_LONG).show();
+                mProgress.dismiss();
+            }
+
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String,String>();
+
+                String userEmail = getIntent().getExtras().getString("rUser");
+                String punto_= mEditText_punto.getText().toString().trim();
+                String obserservacion_= mEditText_observacion.getText().toString().trim();
+
+                /*Obtener Fecha en dispositivo*/
+                SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss");
+                String getFecha = s.format(new Date());
+                String name ="Viia Task";
+                String usuario =userEmail;
+                String punto =punto_;
+                String observacion =obserservacion_;
+                String urlImagen ="http://legalmovil.com/invian/public/uploads/VT_"+getFecha+".jpg";
+
+                params.put("name",name);
+                params.put("usuario",usuario);
+                params.put("punto",punto);
+                params.put("observacion",observacion);
+                params.put("urlImagen",urlImagen);
+                params.put("fecha",getFecha);
+                upImage(getFecha);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -330,15 +388,13 @@ public class Task extends AppCompatActivity {
                 finish();
             }
         });
-
         builder.show();
     }
 
     private String imageToString(Bitmap bitmap){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,10,byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes,Base64.DEFAULT);
     }
-
 }
