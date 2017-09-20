@@ -5,22 +5,43 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/fondo"
     tools:context="v.viia.com.viia_movil.Login">
 
-/*
+
     <Space
         android:layout_width="match_parent"
-        android:layout_height="100dp" />*/
+        android:layout_height="70dp" />
+
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:background="@color/white"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity=""
+            android:background="@drawable/viia_screen"
+              />
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+
         android:textSize="50sp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:text="Viian Screen"/>
+        android:text="Viian Screen"
+
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,11 +50,12 @@
         android:textSize="20dp"
         android:text="monitoring"
         android:textColor="@color/white"
+        android:visibility="gone"
         android:textStyle="bold"/>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="80dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -42,6 +64,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:id="@+id/edit_text_user"
+        android:text="Kelson"
         android:background="@drawable/edittext_login_form"
         android:hint="Username"/>
 
@@ -50,9 +73,10 @@
         android:layout_height="wrap_content"
         android:textColorHint="@color/colorAccent"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="18dp"
         android:layout_marginRight="32dp"
         android:inputType="textPassword"
+        android:text="123456789"
 
         android:background="@drawable/edittext_login_form"
         android:hint="Password"/>
@@ -73,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="16dp"
         android:textColor="@color/white"
         android:gravity="center_horizontal"

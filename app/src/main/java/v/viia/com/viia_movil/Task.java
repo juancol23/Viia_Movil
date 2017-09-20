@@ -97,7 +97,6 @@ public class Task extends AppCompatActivity {
         mRlView = (RelativeLayout) findViewById(R.id.activity_task);
 
 
-
         mSubirTelerik =(Button)  findViewById(R.id.btnTelerik);
 
         if(mayRequestStoragePermission()) {
