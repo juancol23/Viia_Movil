@@ -8,19 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
     private Button mBtnLogin;
     private EditText mEdit_text_user;
 
-    SharedPreferences sp_usuario = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        sp_usuario = getSharedPreferences("LOL", MODE_PRIVATE);
 
         mEdit_text_user = (EditText) findViewById(R.id.edit_text_user);
 
@@ -31,8 +31,14 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentLogin = new Intent(Login.this, Task.class);
                 startActivity(intentLogin);
-                String rUser = mEdit_text_user.getText().toString();
-                sp_usuario.edit().putString("usuario", rUser).commit();
+                String rUser = mEdit_text_user.getText().toString().trim();
+
+                    Log.v("USUARIO",rUser);
+                Toast.makeText(getApplicationContext(), rUser, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(Login.this, Task.class);
+                intent.putExtra("rUser", rUser);
+                startActivity(intent);
 
 
             }

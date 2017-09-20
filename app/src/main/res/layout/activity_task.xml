@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_task"
     android:layout_width="match_parent"
@@ -9,15 +10,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="v.viia.com.viia_movil.Task">
-
-    <ImageView
-        android:id="@+id/set_picture"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-
-        android:layout_below="@+id/show_options_button"/>
 
     <Button
         android:id="@+id/subir"
@@ -41,5 +33,69 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/subir"
         android:layout_toStartOf="@+id/subir" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="SNM-013"
+        android:ems="10"
+        android:layout_below="@+id/set_picture"
+        android:layout_marginTop="31dp"
+        android:id="@+id/editText_punto" />
+
+    <ImageView
+        android:id="@+id/set_picture"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+
+        android:rotation="90"
+        android:foregroundGravity="center_vertical"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/subir"
+        android:layout_alignRight="@+id/subir"
+        android:layout_alignEnd="@+id/subir" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_user"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="gone" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:layout_below="@+id/editText_punto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="21dp"
+        android:id="@+id/editText_observacion"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Observacion"
+        android:text="Observación: Led Apagada" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:layout_below="@+id/editText_observacion"
+        android:layout_alignRight="@+id/set_picture"
+        android:layout_alignEnd="@+id/set_picture"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="12dp"
+        android:id="@+id/editText_fecha"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

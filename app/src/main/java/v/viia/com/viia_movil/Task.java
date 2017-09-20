@@ -22,8 +22,10 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -36,6 +38,9 @@ import com.android.volley.toolbox.Volley;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +63,12 @@ public class Task extends AppCompatActivity {
     private RelativeLayout mRlView;
     private String mPath;
     private ProgressDialog mProgress;
+
+
+
+
+    private TextView mTv_user;
+    private EditText mEditText_punto, mEditText_observacion,mEditText_fecha;
     //Servicio
     //private String UploadUrl = "http://legalmovil.com/service/updateinf2o.php";
     private String UploadUrl = "http://legalmovil.com/invian/welcome/nombre";
@@ -67,6 +78,15 @@ public class Task extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+
+        mEditText_punto = (EditText) findViewById(R.id.editText_punto);
+        mEditText_observacion = (EditText) findViewById(R.id.editText_observacion);
+        mEditText_fecha = (EditText) findViewById(R.id.editText_fecha);
+
+        mTv_user = (TextView) findViewById(R.id.tv_user);
+        mTv_user.setText(""+getIntent().getExtras().getString("rUser"));
+
+        // mEditText_user.setText(usuario);
 
         mProgress = new ProgressDialog(this);
         mSetImage = (ImageView) findViewById(R.id.set_picture);
@@ -205,7 +225,6 @@ public class Task extends AppCompatActivity {
 
 
 
-
                     break;
                 case SELECT_PICTURE:
                     Uri path = data.getData();
@@ -224,12 +243,16 @@ public class Task extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
                 mProgress.dismiss();
 
+                //mSetImage.setImageResource(0);
+
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Task.this,"error",Toast.LENGTH_LONG).show();
                 mProgress.dismiss();
+
             }
 
         }){
@@ -239,20 +262,30 @@ public class Task extends AppCompatActivity {
                 //String ten = nombre.getText().toString;
                 String imagen_camara = imageToString(bitmap);
 
+                String userEmail = getIntent().getExtras().getString("rUser");
+
+                String obser= mEditText_observacion.getText().toString().trim();
+                String punt= mEditText_punto.getText().toString().trim();
+               /* DateFormat df = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
+                String fech = df.format(Calendar.getInstance().getTime());
+                mEditText_fecha.setText(fech);
+*/
 
                 String name ="Viia Task";
-                String usuario ="Juan Valdemar";
-                String punto ="Javier prado";
-                String observacion ="Tiene quemado el led";
-                String fecha ="20-09-2017";
+                String usuario =userEmail;
+                String punto =punt;
+                String observacion =obser;
+                String fecha ="Fecha hoy";
+
+
                 params.put("name",name);
                 params.put("usuario",usuario);
                 params.put("punto",punto);
                 params.put("observacion",observacion);
                 params.put("fecha",fecha);
 
-                params.put("image",imagen_camara);
-                // Log.v("imagen_camara",imagen_camara);
+                 params.put("image",imagen_camara);
+               // Log.v("imagen_camara",h);
                // Log.v("TAGA",imagen_select);
                 return params;
             }
