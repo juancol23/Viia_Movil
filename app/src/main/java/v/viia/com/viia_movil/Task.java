@@ -59,7 +59,9 @@ public class Task extends AppCompatActivity {
     private String mPath;
     private ProgressDialog mProgress;
     //Servicio
-    private String UploadUrl = "http://legalmovil.com/service/updateinf2o.php";
+    //private String UploadUrl = "http://legalmovil.com/service/updateinf2o.php";
+    private String UploadUrl = "http://legalmovil.com/invian/welcome/nombre";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,8 +203,6 @@ public class Task extends AppCompatActivity {
                     bitmap = BitmapFactory.decodeFile(mPath);
                     mSetImage.setImageBitmap(bitmap);
 
-                    Log.v("TAGA",imageToString(bitmap));
-                    String a = imageToString(bitmap);
 
 
 
@@ -210,6 +210,7 @@ public class Task extends AppCompatActivity {
                 case SELECT_PICTURE:
                     Uri path = data.getData();
                     mSetImage.setImageURI(path);
+
                     break;
 
             }
@@ -237,15 +238,22 @@ public class Task extends AppCompatActivity {
                 Map<String,String> params = new HashMap<String,String>();
                 //String ten = nombre.getText().toString;
                 String imagen_camara = imageToString(bitmap);
-                String imagen_select = imageToString(bitmap);
 
 
-                String name = "VT";
+                String name ="Viia Task";
+                String usuario ="Juan Valdemar";
+                String punto ="Javier prado";
+                String observacion ="Tiene quemado el led";
+                String fecha ="20-09-2017";
                 params.put("name",name);
-                params.put("image",imagen_camara);
+                params.put("usuario",usuario);
+                params.put("punto",punto);
+                params.put("observacion",observacion);
+                params.put("fecha",fecha);
 
-                /* Log.v("TAGA",name);
-                Log.v("TAGA",image);*/
+                params.put("image",imagen_camara);
+                // Log.v("imagen_camara",imagen_camara);
+               // Log.v("TAGA",imagen_select);
                 return params;
             }
         };
