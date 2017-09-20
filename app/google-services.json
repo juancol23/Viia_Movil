@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "186076468461",
+    "firebase_url": "https://viia-movil.firebaseio.com",
+    "project_id": "viia-movil",
+    "storage_bucket": "viia-movil.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186076468461:android:23afeb41de2fe49c",
+        "android_client_info": {
+          "package_name": "v.viia.com.viia_movil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186076468461-v4ug13po2ufvgpr4nhk2nmlm7rrji6gr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "v.viia.com.viia_movil",
+            "certificate_hash": "d17b4c2650a95038d538466ee4df2435ae194eaf"
+          }
+        },
+        {
+          "client_id": "186076468461-2n0kahk92j9ttb4rieses5s5e6g8psav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6oqZNzL92ToXmWwVNYJTS_iCPkJw3SFo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186076468461-2n0kahk92j9ttb4rieses5s5e6g8psav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
