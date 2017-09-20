@@ -160,8 +160,6 @@ public class Task extends AppCompatActivity {
 
             Log.v("TAG_IMAGEN","IMAGEN GUARDADA"+newFile);
 
-
-
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
             startActivityForResult(intent, PHOTO_CODE);
@@ -238,10 +236,13 @@ public class Task extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String,String>();
                 //String ten = nombre.getText().toString;
+                String imagen_camara = imageToString(bitmap);
+                String imagen_select = imageToString(bitmap);
+
 
                 String name = "VT";
                 params.put("name",name);
-                params.put("image",imageToString(bitmap));
+                params.put("image",imagen_camara);
 
                 /* Log.v("TAGA",name);
                 Log.v("TAGA",image);*/
